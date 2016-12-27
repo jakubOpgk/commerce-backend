@@ -1,6 +1,12 @@
 language: java
 jdk:
  - oraclejdk8
+cache:
+  directores:
+    - $HOME/.gradle
+    - .gradle
+script:
+  - ./gradlew build
 deploy:
  provider: heroku
  skip_cleanup: true
