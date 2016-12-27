@@ -1,12 +1,13 @@
 buildscript {
 	ext {
 		springBootVersion = '1.4.3.RELEASE'
+		gradleDockerVer = '1.2'
 	}
 	repositories {
 		mavenCentral()
 	}
 	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}", "se.transmode.gradle:gradle-docker:${gradleDockerVer}"
 	}
 }
 
