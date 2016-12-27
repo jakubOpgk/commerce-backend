@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar  build/libs/commerce.jar
+web: java -Dserver.port=$PORT -jar build/libs/commerce.jar
