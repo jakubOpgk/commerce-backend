@@ -44,4 +44,12 @@ public class AuctionServiceImpl implements AuctionService {
 
         repository.delete(id);
     }
+
+    @Override
+    public Auction save(Auction auction) {
+
+        log.info("Saving auction");
+
+        return repository.save(auction);
+    }
 }

@@ -14,4 +14,6 @@ public interface AuctionService {
     public Auction get(Long id);
 
     public void remove(Long id);
+
+    public Auction save(Auction auction);
 }
