@@ -7,3 +7,5 @@ deploy:
   secure: $HEROKU_API_KEY
  app: commerce-jakubopgk
  branch: develop
+ on:
+     branch: develop
