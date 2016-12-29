@@ -7,6 +7,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.TransactionSystemException;
+import pl.rzeszow.opgk.entity.Auction;
+
+import javax.persistence.RollbackException;
+import javax.validation.ConstraintViolationException;
 
 /**
  * Created by Kuba on 27.12.2016.
@@ -23,28 +28,57 @@ public class AuctionRepositoryTest {
         auctionRepository.deleteAll();
     }
 
-    @Test
+    @Test(expected= ConstraintViolationException.class)
     public void shouldBeFailToSaveWithoutDescription() {
-        Assert.assertTrue(false);
+        try {
+            auctionRepository.save(new Auction());
+        } catch (ConstraintViolationException e) {
+            e.getConstraintViolations().forEach(c -> {
+                c.getPropertyPath().forEach(f -> Assert.assertEquals(null, f.getName()));
+            });
+            throw e;
+        }
     }
 
     @Test
     public void shouldBeSuccessToSave() {
-
+        Auction auction = new Auction();
+        auction.setTitle("title");
+        auctionRepository.save(auction);
+        Assert.assertTrue(auctionRepository.count() == 1);
     }
 
     @Test
-    public void shouldBeFailToUpdateWithoutDescription() {
+    public void shouldListAll() {
+        Auction auction = new Auction();
+        auction.setTitle("title");
+        auctionRepository.save(auction);
+        Iterable<Auction> tasks = auctionRepository.findAll();
+        Assert.assertTrue(tasks.iterator().hasNext());
+        tasks.forEach(t -> Assert.assertEquals(null, t.getDescription()));
+    }
 
+    @Test(expected= TransactionSystemException.class)
+    public void shouldBeFailToUpdateWithoutDescription() {
+        try {
+            Auction auction = auctionRepository.save(new Auction());
+            auction.setDescription(null);
+            auctionRepository.save(auction);
+        } catch (TransactionSystemException e) {
+            ((ConstraintViolationException)((RollbackException)e.getCause()).getCause()).getConstraintViolations().forEach(c -> {
+                c.getPropertyPath().forEach(f -> Assert.assertEquals(null, f.getName()));
+            });
+            throw e;
+        }
     }
 
     @Test
     public void shouldBeSuccessToUpdate() {
-
+        //TODO: need to implement
     }
 
     @Test
     public void shouldBeSuccessToDelete() {
-
+        //TODO: need to implement
     }
 }

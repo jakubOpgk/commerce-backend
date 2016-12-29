@@ -4,7 +4,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by Kuba
@@ -22,6 +24,9 @@ public class Auction {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt = new Date();
+
+    @OneToMany
+    private Collection<Comment> comments;
 
     public Auction() {
     }
@@ -56,5 +61,13 @@ public class Auction {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Collection<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Collection<Comment> comments) {
+        this.comments = comments;
     }
 }
