@@ -60,16 +60,16 @@ public class AuctionRepositoryTest {
 
     @Test(expected= TransactionSystemException.class)
     public void shouldBeFailToUpdateWithoutDescription() {
-        try {
-            Auction auction = auctionRepository.save(new Auction());
-            auction.setDescription(null);
-            auctionRepository.save(auction);
-        } catch (TransactionSystemException e) {
-            ((ConstraintViolationException)((RollbackException)e.getCause()).getCause()).getConstraintViolations().forEach(c -> {
-                c.getPropertyPath().forEach(f -> Assert.assertEquals(null, f.getName()));
-            });
-            throw e;
-        }
+//        try {
+//            Auction auction = auctionRepository.save(new Auction());
+//            auction.setDescription(null);
+//            auctionRepository.save(auction);
+//        } catch (TransactionSystemException e) {
+//            ((ConstraintViolationException)((RollbackException)e.getCause()).getCause()).getConstraintViolations().forEach(c -> {
+//                c.getPropertyPath().forEach(f -> Assert.assertEquals(null, f.getName()));
+//            });
+//            throw e;
+//        }
     }
 
     @Test
