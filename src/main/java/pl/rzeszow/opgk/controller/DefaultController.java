@@ -12,6 +12,6 @@ public class DefaultController {
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String indexAction() {
-        return "Hello world";
+        return "Hello world Kamil opgk";
     }
 }

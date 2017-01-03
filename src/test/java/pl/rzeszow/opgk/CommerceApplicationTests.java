@@ -25,6 +25,7 @@ public class CommerceApplicationTests {
 
 	@Test
 	public void contextLoads() {
+
 	}
 
 	@Test
@@ -33,5 +34,4 @@ public class CommerceApplicationTests {
 				.andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.content().string("Hello world"))
 				.andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"));
 	}
-
 }
